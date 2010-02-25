@@ -1,5 +1,6 @@
 require 'rubygems'
 require 'sinatra'
+require 'json'
 
 root = File.dirname(File.expand_path(__FILE__))
 $LOAD_PATH.unshift root
