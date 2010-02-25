@@ -1,10 +1,11 @@
 require 'rubygems'
 require 'sinatra'
 
-root = File.dirname(File.dirname(File.expand_path(__FILE__)))
-$: << root
-$: << File.join(root, 'lib')
+root = File.dirname(File.expand_path(__FILE__))
+$LOAD_PATH.unshift root
+$LOAD_PATH.unshift File.join(root, 'lib')
 
+set :root, root
 set :run, :false
 
 require 'main'

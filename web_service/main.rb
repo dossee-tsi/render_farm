@@ -1,7 +1,3 @@
-require 'rubygems'
-require 'sinatra'
-require 'mongo'
-
 # Task list
 get '/' do
   @posts = [] # Temporary
