@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+  <head>
+    <title>DOSSEE TTI Render Farm Manager</title>
+    <link href="css/style.css" rel="stylesheet" type="text/css" media="screen" />
+  </head>
+  <body>
+    <div id="main">
+      <table class="tasks">
+        <tr>
+        	<th>ID</th>
+        	<th>User</th>
+        	<th>Status</th>
+        	<th>Created</th>
+        	<th>Modified</th>
+        	<th>Hash</th>
+        	<th>&#160;</th>
+        </tr>
+        <% for task in @tasks %>
+          <tr id="task<%=task[:id] %>">
+            <td><%=task[:id] %></td>
+            <td><%=task[:user] %></td>
+            <td><%=task[:status] %></td>
+            <td><%=task[:created] %></td>
+            <td><%=task[:modified] %></td>
+            <td><%=task[:hash] %></td>
+            <td>
+              <button class="blend">.blend</button>
+              <button class="xml">.xml</button>
+              <button class="reject">Reject</button>
+            </td>
+          </tr>
+        <% end %>
+      </table>
+    </div>
+  </body>
+</html>

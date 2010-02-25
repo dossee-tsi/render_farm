@@ -1,0 +1,45 @@
+body,
+html,
+ol,
+ul,
+p
+{
+    margin: 0px;
+    padding: 0px;
+}
+
+#main
+{
+    padding: 20px;
+}
+
+table.tasks
+{
+    width: 100%;
+    color: #444;
+    border: none;
+    border-spacing: 0px;
+}
+
+table.tasks th
+{
+    text-align: left;
+}
+
+table.tasks,
+table.tasks button
+{
+    font-size: 90%;
+}
+
+table.tasks tr:hover td
+{
+    color: #222;
+    background-color: #eee;
+}
+
+table.tasks td,
+table.tasks th
+{
+    border: none;
+}
