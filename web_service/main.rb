@@ -6,5 +6,6 @@ end
 
 # API
 get %r{^/api/([\w]+)(?:/([\w]+))?/?$} do |collection, element|
-  # Relax
+  content_type :json
+  {}.to_json
 end
