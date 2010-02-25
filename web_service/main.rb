@@ -2,9 +2,6 @@ require 'rubygems'
 require 'sinatra'
 require 'mongo'
 
-root = File.dirname(File.dirname(File.expand_path(__FILE__)))
-$: << File.join(root, 'lib')
-
 # Task list
 get '/' do
   @posts = [] # Temporary
