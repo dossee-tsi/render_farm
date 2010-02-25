@@ -3,6 +3,8 @@
   <head>
     <title>DOSSEE TTI Render Farm Manager</title>
     <link href="css/style.css" rel="stylesheet" type="text/css" media="screen" />
+    <script type="text/javascript" src="/js/jquery.js"></script>
+    <script type="text/javascript" src="/js/main.js"></script>
   </head>
   <body>
     <div id="main">
@@ -17,7 +19,7 @@
         	<th>&#160;</th>
         </tr>
         <% for task in [] %>
-          <tr id="task<%=task[:id] %>">
+          <tr>
             <td><%=task[:id] %></td>
             <td><%=task[:user] %></td>
             <td><%=task[:status] %></td>
