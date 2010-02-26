@@ -18,8 +18,6 @@ module RenderFarm
       self.status = :uploaded
       self.created = Time.new
       self.modified = self.created
-
-      require 'digest/sha1'
       sha1 = Digest::SHA1.new
       open(file, 'rb') do |io|
         until io.eof
@@ -27,7 +25,6 @@ module RenderFarm
           sha1.update(buf)
         end
       end
-
       self.hash = sha1.hexdigest
       self.render_time = render_time
       self.render_start = nil
