@@ -6,8 +6,6 @@ module RenderFarm
   require 'client'
   require 'task'
 
-  # Database
-
   configure do
     MongoMapper.database = 'renderfarm'
     set :task_status, [
@@ -20,8 +18,6 @@ module RenderFarm
       :completed
     ]
   end
-
-  # Utilities
 
   helpers do
 
@@ -72,72 +68,8 @@ module RenderFarm
     erb :index, :locals => { :tasks => tasks }
   end
 
-  post '/register' do
-    local_area!
-    requires params, :email, :password
-    client = Client.new({
-      :email => params[:email],
-      :password => Digest::SHA1.hexdigest(params[:password]),
-      :created => Time.new,
-      :render_time => 0,
-      :tasks => []
-    })
-    if client.save
-      content_type :json, :charset => 'utf-8'
-      { :id => client.id, :created => client.created }.to_json
-    else
-      throw_bad_request
-    end
-  end
-
-  get '/client' do
-    client_area!
-    client = Client.first(:email => @auth.credentials[0])
-    content_type :json, :charset => 'utf-8'
-    {
-      :email => client.email,
-      :created => client.created,
-      :render_time => client.render_time,
-      :tasks => client.tasks
-    }.to_json
-  end
-
-  post '/client' do
-    local_area!
-    requires params, :render_time
-    key = one_of params, :id, :email
-    client = Client.first(key => params[key])
-    updated = false
-    if client
-      client.render_time = params[:render_time]
-      updated = client.save
-    end
-    if updated
-      content_type :json, :charset => 'utf-8'
-      {
-        :id => client.id,
-        :email => client.email,
-        :created => client.created,
-        :render_time => client.render_time
-      }.to_json
-    else
-      throw_bad_request
-    end
-  end
-
-  post '/tasks' do
-    client_area!
-    # upload
-  end
-
-  get '/tasks/:id' do
-    local_area!
-    # status, xml, blend, output
-  end
-
-  post '/tasks/:id' do
-    local_area!
-    # accept, reject
-  end
+  load 'routes/register.rb'
+  load 'routes/client.rb'
+  load 'routes/tasks.rb'
 
 end
