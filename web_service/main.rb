@@ -97,8 +97,8 @@ module RenderFarm
     {
       :email => client.email,
       :created => client.created,
-      :render_time => 0,
-      :tasks => []
+      :render_time => client.render_time,
+      :tasks => client.tasks
     }.to_json
   end
 
