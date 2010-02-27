@@ -43,8 +43,8 @@ module RenderFarm
       zip.each do |zipped_file|
         next if zipped_file.directory? || (zipped_file.name[0, base_path.length] != base_path)
         path = File.join(destination, zipped_file.name[base_path.length..-1])
-        FileUtils.mkdir_p(File.dirname(path))
         begin
+          FileUtils.mkdir_p(File.dirname(path))
           zip.extract(zipped_file, path) unless File.exist?(path)
         rescue
           return false
@@ -54,13 +54,12 @@ module RenderFarm
     end
 
     def unzip_lx(file, destination)
+      result = false
       Zip::ZipFile.open(file) do |zip|
-        success = false
         base_path = zip_base_path(zip)
-        success = zip_extract(zip, base_path, destination) if base_path
-        p success
-        # reject unless success
+        result = zip_extract(zip, base_path, destination) if base_path
       end
+      result
     end
 
   end
@@ -89,9 +88,14 @@ module RenderFarm
       end
     end
 
-    # Fork extraction
+    # Async extraction
     Thread.new do
-      unzip_lx(tempfile.path, File.join(options.lx_dir, task.hash))
+      destination = File.join(options.lx_dir, task.hash)
+      unless unzip_lx(tempfile.path, destination)
+        task.status = :rejected
+        task.save
+        FileUtils.rm_r(destination)
+      end
     end
 
     # Return result
