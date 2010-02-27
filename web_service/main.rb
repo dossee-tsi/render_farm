@@ -75,6 +75,21 @@ module RenderFarm
     erb :index, :locals => { :tasks => tasks }
   end
 
+  get '/newtask' do
+    #temp
+    task = Task.new
+    task.status = :uploaded
+    task.client_id = Client.first(:id => '4b87f873b1e38c1885000001').id
+    task.modified = Time.now
+    task.created = task.modified
+    task.hash = ""
+    40.times do
+      task.hash += rand(9).to_s
+    end
+    task.render_time = 100
+    task.render_start = nil
+  end
+
   load 'routes/register.rb'
   load 'routes/client.rb'
   load 'routes/tasks.rb'

@@ -11,22 +11,28 @@ p
 #main
 {
     padding: 20px;
+    font-family: 'lucida grande','lucida sans unicade',sans-serif;
 }
 
 table.tasks
 {
     width: 100%;
-    color: #444;
+    color: #555;
     border: none;
     border-spacing: 0px;
 }
 
 table.tasks th
 {
+    color: #222;
     text-align: left;
 }
 
-table.tasks,
+table.tasks
+{
+    font-size: 80%;
+}
+
 table.tasks button
 {
     font-size: 90%;
@@ -35,7 +41,6 @@ table.tasks button
 table.tasks tr:hover td
 {
     color: #222;
-    background-color: #eee;
 }
 
 table.tasks td,
@@ -43,3 +48,39 @@ table.tasks th
 {
     border: none;
 }
+
+table.tasks tr.uploaded
+{
+    background-color: #EBEBEB;
+}
+
+table.tasks tr.rejected
+{
+    background-color: #F47B78;
+}
+
+table.tasks tr.examined
+{
+    background-color: #FFF978;
+}
+
+table.tasks tr.accepted
+{
+    background-color: #70F378;
+}
+
+table.tasks tr.sent
+{
+    background-color: #71FAFE;
+}
+
+table.tasks tr.processed
+{
+    background-color: #A28FBB;
+}
+
+table.tasks tr.completed
+{
+    background-color: #919191;
+}
+

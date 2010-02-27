@@ -3,6 +3,7 @@ module RenderFarm
 
     include MongoMapper::Document
 
+    key :client_id, ObjectId
     key :status, Symbol, :required => true, :allow_blank => false
     key :created, Time, :required => true, :allow_blank => false
     key :modified, Time, :required => true, :allow_blank => false
