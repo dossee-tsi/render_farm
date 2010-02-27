@@ -26,7 +26,7 @@ module RenderFarm
 
     def zip_base_path(zip)
       zip.each do |zipped_file|
-        if zipped_file.name =~ /.lxs$/
+        if zipped_file.name =~ /\.lxs$/
           if (dirname = File.dirname(zipped_file.name)) != '.'
             zipped_file.name = dirname + 'scene.lxs'
             return dirname
