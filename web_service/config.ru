@@ -8,6 +8,8 @@ $LOAD_PATH.unshift File.join(root, 'lib')
 
 set :root, root
 set :run, :false
+set :lx_dir, '/var/lx'
+set :render_dir, '/mnt/render'
 
 require 'main'
 run Sinatra::Application

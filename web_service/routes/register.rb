@@ -11,8 +11,7 @@ module RenderFarm
       :tasks => []
     })
     if client.save
-      content_type :json, :charset => 'utf-8'
-      { :id => client.id, :created => client.created }.to_json
+      json({ :id => client.id, :created => client.created })
     else
       throw_bad_request
     end

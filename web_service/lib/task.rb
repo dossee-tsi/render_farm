@@ -8,27 +8,11 @@ module RenderFarm
     key :modified, Time, :required => true, :allow_blank => false
     key :hash, String, :required => true, :allow_blank => false
     key :render_time, Integer, :required => true, :allow_blank => false
-    key :render_start, Time
+    key :render_start, Time, :required => true, :allow_blank => true
 
+    validates_uniqueness_of :hash
     validates_length_of :hash, :is => 40
     validates_numericality_of :render_time, :only_integer => true
-
-    def initialize(user, file, render_time)
-      self.user = user
-      self.status = :uploaded
-      self.created = Time.new
-      self.modified = self.created
-      sha1 = Digest::SHA1.new
-      open(file, 'rb') do |io|
-        until io.eof
-          buf = io.readpartial(1024)
-          sha1.update(buf)
-        end
-      end
-      self.hash = sha1.hexdigest
-      self.render_time = render_time
-      self.render_start = nil
-    end
 
   end
 end
