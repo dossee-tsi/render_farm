@@ -4,29 +4,40 @@ $(function(){
     });
     
     $('.accept').click(function(){
+        task = getTask(this);
+        disableButtons(task);
         $.post('/tasks/' + getId(this),
             { action: 'accept' },
                 function(data){
                 if (data.status == 'accepted')
                 {
-                    getTaskById(data.id).attr('class', 'accepted');
-                    getTaskById(data.id).find('td:first + td').text('Accepted');
+                    task.attr('class', 'accepted');
+                    task.find('td:first + td').text('Accepted');
+                    task.find('.reject').removeAttr('disabled');
                 }
             },
             'json');
     });
     
     $('.reject').click(function(){
+        task = getTask(this);
+        disableButtons(task);
         $.post('/tasks/' + getId(this),
             { action: 'reject' },
             function(data){
                 if (data.status == 'rejected')
                 {
-                    getTaskById(data.id).remove();
+                    task.remove();
                 }
             },
             'json');
     });
+
+    function disableButtons(task)
+    {
+        $(task).find('.accept').attr('disabled', 'disabled');
+        $(task).find('.reject').attr('disabled', 'disabled');
+    }
 
     function getId(el)
     {

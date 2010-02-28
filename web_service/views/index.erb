@@ -28,7 +28,7 @@
             <td><%=task.hash %></td>
             <td>
               <button class="open">Open</button>
-              <button class="accept">Accept</button>
+              <button class="accept"<% if task.status == :accepted %> disabled="disabled"<% end %>>Accept</button>
               <button class="reject">Reject</button>
             </td>
           </tr>
