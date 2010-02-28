@@ -15,6 +15,7 @@ module RenderFarm
       now = Time.new
       hash = file_hash(tempfile)
       Task.new({
+        :client_id => @client.id,
         :status => :uploaded,
         :created => now,
         :modified => now,
@@ -93,14 +94,11 @@ module RenderFarm
     success = false
 
     if task.save
-      client = Client.first(:email => @auth.credentials[0])
-      if client
-        client.tasks += [task.id]
-        success = client.save
-        unless success
-          task.destroy
-          throw_bad_request
-        end
+      @client.tasks += [task.id]
+      success = @client.save
+      unless success
+        task.destroy
+        throw_bad_request
       end
     end
 

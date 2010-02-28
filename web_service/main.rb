@@ -53,8 +53,9 @@ module RenderFarm
 
     def authorized?
       @auth ||= Rack::Auth::Basic::Request.new(request.env)
-      @auth.provided? && @auth.basic? && @auth.credentials &&
-        Client.first(:email => @auth.credentials[0], :password => Digest::SHA1.hexdigest(@auth.credentials[1]))
+      if @auth.provided? && @auth.basic? && @auth.credentials
+        @client = Client.first(:email => @auth.credentials[0], :password => Digest::SHA1.hexdigest(@auth.credentials[1]))
+      end
     end
 
     def json(map)

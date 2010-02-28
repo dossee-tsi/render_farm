@@ -2,12 +2,11 @@ module RenderFarm
 
   get '/client' do
     client_area!
-    client = Client.first(:email => @auth.credentials[0])
     json({
-      :email => client.email,
-      :created => client.created,
-      :render_time => client.render_time,
-      :tasks => client.tasks
+      :email => @client.email,
+      :created => @client.created,
+      :render_time => @client.render_time,
+      :tasks => @client.tasks
     })
   end
 
