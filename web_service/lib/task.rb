@@ -4,12 +4,12 @@ module RenderFarm
     include MongoMapper::Document
 
     key :client_id, ObjectId
-    key :status, Symbol, :required => true, :allow_blank => false
-    key :created, Time, :required => true, :allow_blank => false
-    key :modified, Time, :required => true, :allow_blank => false
-    key :hash, String, :required => true, :allow_blank => false
-    key :render_time, Integer, :required => true, :allow_blank => false
-    key :render_start, Time, :required => true, :allow_blank => true
+    key :status, Symbol, :required => true
+    key :created, Time, :required => true
+    key :modified, Time, :required => true
+    key :hash, String, :required => true
+    key :render_time, Integer, :required => true
+    key :render_start, Time
 
     validates_uniqueness_of :hash
     validates_length_of :hash, :is => 40

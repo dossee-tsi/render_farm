@@ -3,11 +3,11 @@ module RenderFarm
 
     include MongoMapper::Document
 
-    key :email, String, :required => true, :allow_blank => false
-    key :password, String, :required => true, :allow_blank => false
-    key :created, Time, :required => true, :allow_blank => false
-    key :render_time, Integer, :required => true, :allow_blank => false
-    key :tasks, Array, :required => true, :allow_blank => false
+    key :email, String, :required => true
+    key :password, String, :required => true
+    key :created, Time, :required => true
+    key :render_time, Integer, :required => true
+    key :tasks, Array, :required => true
 
     email_format = /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i
 
