@@ -3,7 +3,7 @@ module RenderFarm
 
     include MongoMapper::Document
 
-    key :client_id, ObjectId
+    key :client_id, ObjectId, :required => true
     key :status, Symbol, :required => true
     key :created, Time, :required => true
     key :modified, Time, :required => true

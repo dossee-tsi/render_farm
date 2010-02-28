@@ -25,6 +25,7 @@ table.tasks
     color: #555;
     border-spacing: 0px;
     color: #222;
+    border-collapse: collapse;
 }
 
 table.tasks th
@@ -38,9 +39,19 @@ table.tasks th, table.tasks td
     padding: 2px;
 }
 
+table.tasks td
+{
+    border: 1px solid #ddd;
+}
+
 table.tasks button
 {
     font-size: 0.9em;
+}
+
+table.tasks button.invisible
+{
+    visibility: hidden;
 }
 
 table.tasks tr { color: #444; }

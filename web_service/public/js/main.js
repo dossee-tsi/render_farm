@@ -18,6 +18,12 @@ $(function(){
                         },
                         width: 400
                     });
+                dialog.find('input').focus(function(){
+                    $(this).select();
+                })
+                .mouseup(function(e){
+                    e.preventDefault();
+                });
             },
             'json');
 
@@ -31,9 +37,9 @@ $(function(){
             function(data){
                 if (data.status == 'accepted')
                 {
+                    task.find('.accept, .reject').addClass('invisible');
                     task.attr('class', 'accepted');
                     task.find('td:first + td').text('Accepted');
-                    task.find('.reject').removeAttr('disabled');
                 }
             },
             'json');
@@ -55,8 +61,7 @@ $(function(){
 
     function disableButtons(task)
     {
-        $(task).find('.accept').attr('disabled', 'disabled');
-        $(task).find('.reject').attr('disabled', 'disabled');
+        $(task).find('.accept, .reject').attr('disabled', 'disabled');
     }
 
     function getId(el)

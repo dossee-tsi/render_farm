@@ -73,7 +73,10 @@ module RenderFarm
       :conditions => { :status => options.task_status - [:rejected, :completed] },
       :order => 'created desc'
     )
-    erb :index, :locals => { :tasks => tasks }
+    clients = {}
+    tasks.each {|task| clients[task.client_id] ||= Client.first(:id => task.client_id)}
+    
+    erb :index, :locals => { :tasks => tasks, :clients => clients }
   end
 
   load 'routes/client.rb'
