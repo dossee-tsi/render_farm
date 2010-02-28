@@ -109,34 +109,4 @@ module RenderFarm
     })
   end
 
-  get '/tasks/:id' do
-    local_area!
-    # status, xml, blend, output
-  end
-
-  post '/tasks/:id' do
-    local_area!
-    content_type :json
-    case params[:action]
-    when 'accept'
-      task = Task.first(:id => params[:id])
-      if task
-        task.status = :accepted
-        task.modified = Time.now
-        if task.save
-          {:id => task.id, :status => :accepted, :modified => task.modified}.to_json
-        end
-      end
-    when 'reject'
-      task = Task.first(:id => params[:id])
-      if task
-        task.status = :rejected
-        task.modified = Time.now
-        if task.save
-          {:id => task.id, :status => :rejected, :modified => task.modified}.to_json
-        end
-      end
-    end
-  end
-
 end

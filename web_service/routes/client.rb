@@ -21,16 +21,13 @@ module RenderFarm
       client.render_time = params[:render_time]
       updated = client.save
     end
-    if updated
-      json({
-        :id => client.id,
-        :email => client.email,
-        :created => client.created,
-        :render_time => client.render_time
-      })
-    else
-      throw_bad_request
-    end
+    throw_bad_request unless updated
+    json({
+      :id => client.id,
+      :email => client.email,
+      :created => client.created,
+      :render_time => client.render_time
+    })
   end
 
 end

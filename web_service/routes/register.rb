@@ -10,11 +10,11 @@ module RenderFarm
       :render_time => 0,
       :tasks => []
     })
-    if client.save
-      json({ :id => client.id, :created => client.created })
-    else
-      throw_bad_request
-    end
+    throw_bad_request unless client.save
+    json({
+      :id => client.id,
+      :created => client.created
+    })
   end
 
 end
