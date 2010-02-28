@@ -43,50 +43,23 @@ table.tasks button
     font-size: 0.9em;
 }
 
-table.tasks tbody tr
-{
-    opacity: 0.6;
-}
+table.tasks tr { color: #444; }
+table.tasks tr:hover { color: #fff; }
 
-table.tasks tbody tr:hover
-{
-    opacity: 1;
-}
+table.tasks tr.uploaded { background-color: #eee; }
+table.tasks tr.uploaded:hover { background-color: #999; }
 
-table.tasks tr.uploaded
-{
-    background-color: #EBEBEB;
-}
+table.tasks tr.examined { background-color: #f4f4a4; }
+table.tasks tr.examined:hover { background-color: #bb3; }
 
-table.tasks tr.rejected
-{
-    background-color: #F47B78;
-}
+table.tasks tr.accepted { background-color: #a4f4a4; }
+table.tasks tr.accepted:hover { background-color: #6c6; }
 
-table.tasks tr.examined
-{
-    background-color: #FFF978;
-}
+table.tasks tr.sent { background-color: #a4f4f4; }
+table.tasks tr.sent:hover { background-color: #3bb; }
 
-table.tasks tr.accepted
-{
-    background-color: #70F378;
-}
-
-table.tasks tr.sent
-{
-    background-color: #71FAFE;
-}
-
-table.tasks tr.processed
-{
-    background-color: #A28FBB;
-}
-
-table.tasks tr.completed
-{
-    background-color: #919191;
-}
+table.tasks tr.deployed { background-color: #a4a4f4; }
+table.tasks tr.deployed:hover { background-color: #77f; }
 
 .ui-widget
 {
