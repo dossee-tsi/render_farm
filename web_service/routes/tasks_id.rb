@@ -22,7 +22,7 @@ module RenderFarm
     local_area!
     task = Task.first(:id => params[:id])
     throw_bad_request unless task
-    json task.attributes
+    json task.attributes.merge({:directory => File.join(options.lx_dir, task.hash)})
   end
 
   post '/tasks/:id' do

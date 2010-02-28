@@ -2,8 +2,8 @@
 <html>
   <head>
     <title>DOSSEE TTI Render Farm Manager</title>
-    <link href="css/style.css" rel="stylesheet" type="text/css" media="screen" />
     <link href="css/jquery-ui-redmond.css" rel="stylesheet" type="text/css" media="screen" />
+    <link href="css/style.css" rel="stylesheet" type="text/css" media="screen" />
     <script type="text/javascript" src="/js/jquery.js"></script>
     <script type="text/javascript" src="/js/jquery-ui.js"></script>
     <script type="text/javascript" src="/js/main.js"></script>
@@ -11,28 +11,32 @@
   <body>
     <div id="main">
       <table class="tasks">
-        <tr>
-          <th>User</th>
-          <th>Status</th>
-          <th>Created</th>
-          <th>Modified</th>
-          <th>Hash</th>
-          <th>&#160;</th>
-        </tr>
-        <% for task in tasks %>
-          <tr id="task<%=task.id %>" class="<%=task.status %>">
-            <td><%=task.client_id %></td>
-            <td><%=task.status.to_s.capitalize %></td>
-            <td><%=task.created %></td>
-            <td><%=task.modified %></td>
-            <td><%=task.hash %></td>
-            <td>
-              <button class="open">Open</button>
-              <button class="accept"<% if task.status == :accepted %> disabled="disabled"<% end %>>Accept</button>
-              <button class="reject">Reject</button>
-            </td>
+        <thead>
+          <tr>
+            <th>Client</th>
+            <th>Status</th>
+            <th>Created</th>
+            <th>Modified</th>
+            <th>Hash</th>
+            <th>&#160;</th>
           </tr>
-        <% end %>
+        </thead>
+        <tbody>
+          <% for task in tasks %>
+            <tr id="task<%=task.id %>" class="<%=task.status %>">
+              <td><%=task.client_id %></td>
+              <td><%=task.status.to_s.capitalize %></td>
+              <td><%=task.created %></td>
+              <td><%=task.modified %></td>
+              <td><%=task.hash %></td>
+              <td>
+                <button class="open">Open</button>
+              <button class="accept"<% if task.status == :accepted %> disabled="disabled"<% end %>>Accept</button>
+                <button class="reject">Reject</button>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
       </table>
     </div>
   </body>

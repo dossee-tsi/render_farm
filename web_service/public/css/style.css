@@ -8,6 +8,11 @@ p
     padding: 0px;
 }
 
+body
+{
+    font-size: 12px;
+}
+
 #main
 {
     padding: 20px;
@@ -18,8 +23,8 @@ table.tasks
 {
     width: 100%;
     color: #555;
-    border: none;
     border-spacing: 0px;
+    color: #222;
 }
 
 table.tasks th
@@ -28,25 +33,24 @@ table.tasks th
     text-align: left;
 }
 
-table.tasks
+table.tasks th, table.tasks td
 {
-    font-size: 80%;
+    padding: 2px;
 }
 
 table.tasks button
 {
-    font-size: 90%;
+    font-size: 0.9em;
 }
 
-table.tasks tr:hover td
+table.tasks tbody tr
 {
-    color: #222;
+    opacity: 0.6;
 }
 
-table.tasks td,
-table.tasks th
+table.tasks tbody tr:hover
 {
-    border: none;
+    opacity: 1;
 }
 
 table.tasks tr.uploaded
@@ -82,5 +86,33 @@ table.tasks tr.processed
 table.tasks tr.completed
 {
     background-color: #919191;
+}
+
+.ui-widget
+{
+    font-size: 1em;
+}
+
+.ui-widget dt
+{
+    float: left;
+    clear: left;
+    width: 120px;
+}
+
+.ui-widget dd
+{
+    float: left;
+}
+
+.ui-widget dt, .ui-widget dd
+{
+    margin: 5px 0;
+    height: 25px;
+}
+
+.ui-widget input[type=text]
+{
+    width: 250px;
 }
 
