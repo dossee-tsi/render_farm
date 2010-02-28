@@ -28,10 +28,10 @@ module RenderFarm
       zip.each do |zipped_file|
         if zipped_file.name =~ /\.lxs$/
           if (dirname = File.dirname(zipped_file.name)) != '.'
-            zipped_file.name = dirname + 'scene.lxs'
+            zipped_file.name = File.join(dirname, options.scene_file)
             return dirname
           else
-            zipped_file.name = 'scene.lxs'
+            zipped_file.name = options.scene_file
             return ''
           end
         end
@@ -53,13 +53,29 @@ module RenderFarm
       true
     end
 
-    def unzip_lx(file, destination)
-      result = false
+    def unzip_lx(file, destination, render_time)
       Zip::ZipFile.open(file) do |zip|
         base_path = zip_base_path(zip)
-        result = zip_extract(zip, base_path, destination) if base_path
+        return false unless base_path
+        if zip_extract(zip, base_path, destination)
+          begin
+            scene_file = File.join(destination, options.scene_file)
+            lines = IO.readlines(scene_file)
+            halttime = %r{^(\s*"integer halttime"\s+\[)(\d+)(\]\s*)$}
+            lines.each do |line|
+              if line =~ halttime
+                line.sub!(halttime, '\1' + render_time.to_s  + '\3')
+                break
+              end
+            end
+            File.new(scene_file, 'w').write(lines.join)
+            return true
+          rescue
+            return false
+          end
+        end
       end
-      result
+      false
     end
 
   end
@@ -79,7 +95,7 @@ module RenderFarm
     if task.save
       client = Client.first(:email => @auth.credentials[0])
       if client
-        client.tasks += [task]
+        client.tasks += [task.id]
         success = client.save
         unless success
           task.destroy
@@ -91,7 +107,7 @@ module RenderFarm
     # Async extraction
     Thread.new do
       destination = File.join(options.lx_dir, task.hash)
-      unless unzip_lx(tempfile.path, destination)
+      unless unzip_lx(tempfile.path, destination, task.render_time)
         task.status = :rejected
         task.save
         FileUtils.rm_r(destination)

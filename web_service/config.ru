@@ -10,6 +10,7 @@ set :root, root
 set :run, :false
 set :lx_dir, '/var/lx'
 set :render_dir, '/mnt/render'
+set :scene_file, 'scene.lxs'
 
 require 'main'
 run Sinatra::Application
