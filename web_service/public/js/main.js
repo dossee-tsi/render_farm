@@ -78,4 +78,20 @@ $(function(){
     {
         return $('#task' + id);
     }
+
+    $('.tasks button.open').button({
+        icons: {
+            primary: 'ui-icon-folder-open'
+        }
+    });
+    $('.tasks button.accept').button({
+        icons: {
+            primary: 'ui-icon-check'
+        }
+    });
+    $('.tasks button.reject').button({
+        icons: {
+            primary: 'ui-icon-close'
+        }
+    });
 });

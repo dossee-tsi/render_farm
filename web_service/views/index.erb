@@ -30,9 +30,9 @@
               <td><%=task.modified.getlocal %></td>
               <td><%=task.hash %></td>
               <td>
-                <button class="open ui-button ui-button-text-only ui-widget ui-state-default ui-corner-all"><span class="ui-button-text">Open</span></button>
-                <button class="accept ui-button ui-button-text-only ui-widget ui-state-default ui-corner-all<% if task.status.to_s != 'examined' %> invisible<% end %>"><span class="ui-button-text">Accept</span></button>
-                <button class="reject ui-button ui-button-text-only ui-widget ui-state-default ui-corner-all<% unless ['uploaded', 'examined'].include? task.status.to_s %> invisible<% end %>"><span class="ui-button-text">Reject</span></button>
+                <button class="open">Open</button>
+                <button class="accept<% if task.status.to_s != 'examined' %> invisible<% end %>">Accept</button>
+                <button class="reject<% unless ['uploaded', 'examined'].include? task.status.to_s %> invisible<% end %>">Reject</button>
               </td>
             </tr>
           <% end %>
