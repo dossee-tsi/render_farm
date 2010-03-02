@@ -5,8 +5,8 @@ module RenderFarm
     def set_task_status(id, status)
       task = Task.first(:id => id)
       throw_bad_request unless task
-      throw_bad_request unless ['uploaded', 'examined'].include? task.status.to_s
-      throw_bad_request if task.status.to_s == 'uploaded' and status == :accepted
+      throw_bad_request unless ['unpacked', 'examined'].include? task.status.to_s
+      throw_bad_request if task.status.to_s == 'unpacked' and status == :accepted
       task.status = status
       task.modified = Time.now
       throw_bad_request unless task.save

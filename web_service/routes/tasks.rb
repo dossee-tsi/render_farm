@@ -105,6 +105,9 @@ module RenderFarm
         task.status = :rejected
         task.save
         FileUtils.rm_r(destination) if File.exists? destination
+      else
+        task.status = :unpacked
+        task.save
       end
     end
 
