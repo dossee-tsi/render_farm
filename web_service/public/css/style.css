@@ -16,7 +16,7 @@ body
 #main
 {
     padding: 20px;
-    font-family: 'lucida grande','lucida sans unicade',sans-serif;
+    font-family: Helvetica, Arial, FreeSans, sans-serif; 
 }
 
 table.tasks
@@ -36,7 +36,7 @@ table.tasks th
 
 table.tasks th, table.tasks td
 {
-    padding: 2px;
+    padding: 2px 8px 0px 8px;
 }
 
 table.tasks td
