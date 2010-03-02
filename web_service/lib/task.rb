@@ -12,7 +12,7 @@ module RenderFarm
     key :render_start, Time
 
     validates_uniqueness_of :hash
-    validates_length_of :hash, :is => 40
+    validates_length_of :hash, :is => 32
     validates_numericality_of :render_time, :only_integer => true
 
   end

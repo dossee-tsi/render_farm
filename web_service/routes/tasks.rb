@@ -3,12 +3,12 @@ module RenderFarm
   helpers do
 
     def file_hash(file)
-      sha1 = Digest::SHA1.new
+      md5 = Digest::MD5.new
       until file.eof
         buf = file.readpartial(1024)
-        sha1.update(buf)
+        md5.update(buf)
       end
-      sha1.hexdigest
+      md5.hexdigest
     end
 
     def create_task(tempfile, render_time)
@@ -104,7 +104,7 @@ module RenderFarm
       unless unzip_lx(tempfile.path, destination, task.render_time)
         task.status = :rejected
         task.save
-        FileUtils.rm_r(destination)
+        FileUtils.rm_r(destination) if File.exists? destination
       end
     end
 

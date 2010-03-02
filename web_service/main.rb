@@ -3,6 +3,7 @@ module RenderFarm
   require 'json'
   require 'mongo_mapper'
   require 'digest/sha1'
+  require 'digest/md5'
   require 'fileutils'
   require 'zip/zip'
   require 'client'
