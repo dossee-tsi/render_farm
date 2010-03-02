@@ -91,15 +91,11 @@ module RenderFarm
 
     # Create task
     task = create_task(tempfile, params[:render_time])
-    success = false
-
-    if task.save
-      @client.tasks += [task.id]
-      success = @client.save
-      unless success
-        task.destroy
-        throw_bad_request
-      end
+    throw_bad_request unless task.save
+    @client.tasks += [task.id]
+    unless @client.save
+      task.destroy
+      throw_bad_request
     end
 
     # Async extraction
