@@ -13,6 +13,7 @@ module RenderFarm
     MongoMapper.database = 'renderfarm'
     set :task_status, [
       :uploaded,
+      :unpacked,
       :examined,
       :rejected,
       :accepted,
