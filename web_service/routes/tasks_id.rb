@@ -28,11 +28,12 @@ module RenderFarm
 
   post '/tasks/:id' do
     local_area!
-    requires params, :action
-    case params[:action]
-    when 'accept' then set_task_status(params[:id], :accepted)
-    when 'reject' then set_task_status(params[:id], :rejected)
-    else throw_bad_request
+    requires params, :status
+    status = params[:status].to_sym
+    if options.task_status.include? status
+      set_task_status(params[:id], status) 
+    else
+      throw_bad_request
     end
   end
 
