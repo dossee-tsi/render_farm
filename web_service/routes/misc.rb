@@ -21,5 +21,17 @@ module RenderFarm
     local_area!
     json({ :ips => options.cluster_ips })
   end
+  
+  get '/statuses' do
+    status_count = options.task_status.inject({}) do |hash, key| 
+      hash[key] = 0
+      hash
+    end
+    tasks = Task.all
+    tasks.each do |task|
+      status_count[task_status] += 1 if status_count.include? task.status
+    end
+    json(status_count)
+  end
 
 end
