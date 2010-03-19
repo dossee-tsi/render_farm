@@ -16,5 +16,10 @@ module RenderFarm
       :created => client.created
     })
   end
+  
+  get '/cluster' do
+    local_area!
+    json({ :ips => options.cluster_ips })
+  end
 
 end
