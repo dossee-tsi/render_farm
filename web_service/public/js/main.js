@@ -33,7 +33,7 @@ $(function(){
         var task = getTask(this);
         disableButtons(task);
         $.post('/tasks/' + getId(this),
-            { action: 'accept' },
+            { status: 'accept' },
             function(data){
                 if (data.status == 'accepted')
                 {
@@ -49,7 +49,7 @@ $(function(){
         var task = getTask(this);
         disableButtons(task);
         $.post('/tasks/' + getId(this),
-            { action: 'reject' },
+            { status: 'reject' },
             function(data){
                 if (data.status == 'rejected')
                 {
