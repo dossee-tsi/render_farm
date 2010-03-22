@@ -29,7 +29,7 @@ module RenderFarm
     end
     tasks = Task.all
     tasks.each do |task|
-      status_count[task_status] += 1 if status_count.include? task.status
+      status_count[task.status] += 1 if status_count.include? task.status
     end
     json(status_count)
   end
