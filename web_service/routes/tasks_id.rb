@@ -2,11 +2,13 @@ module RenderFarm
 
   helpers do
 
-    def set_task_status(id, status)
+    def get_task_stauts(id)
       task = Task.first(:id => id)
-      throw_bad_request unless task
-      throw_bad_request unless ['unpacked', 'examined'].include? task.status.to_s
-      throw_bad_request if task.status.to_s == 'unpacked' and status == :accepted
+      task || throw_bad_request
+    end
+    
+    def set_task_status(task, status)
+      throw_bad_request unless options.task_status[task.status].include? status
       task.status = status
       task.modified = Time.now
       throw_bad_request unless task.save
@@ -29,11 +31,8 @@ module RenderFarm
   post '/tasks/:id' do
     local_area!
     requires params, :status
-    status = params[:status].to_sym
-    if options.task_status.include? status
-      set_task_status(params[:id], status) 
-    else
-      throw_bad_request
+    if task = get_task_stauts(params[:id])
+      set_task_status(params[:id], params[:status].to_sym)
     end
   end
 

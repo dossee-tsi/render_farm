@@ -8,19 +8,21 @@ module RenderFarm
   require 'zip/zip'
   require 'client'
   require 'task'
+  require 'status_node'
 
   configure do
     MongoMapper.database = 'renderfarm'
-    set :task_status, [
-      :uploaded,
-      :unpacked,
-      :examined,
-      :rejected,
-      :accepted,
-      :sent,
-      :deployed,
-      :completed
-    ]
+    set :task_status, {
+      :uploaded => [:unpacked, :rejected],
+      :unpacked => [:examined],
+      :examined => [:rejected, :accepted],
+      :rejected => [],
+      :accepted => [:sent],
+      :sent => [:deployed],
+      :deployed => [:rendered],
+      :rendered => [:completed],
+      :completed => []
+    }
   end
 
   helpers do
@@ -72,7 +74,7 @@ module RenderFarm
   get '/' do
     local_area!
     tasks = Task.all(
-      :conditions => { :status => options.task_status - [:rejected, :completed] },
+      :conditions => { :status => options.task_status.keys - [:rejected, :completed] },
       :order => 'created desc'
     )
     clients = {}

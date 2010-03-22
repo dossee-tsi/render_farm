@@ -23,7 +23,7 @@ module RenderFarm
   end
   
   get '/statuses' do
-    status_count = options.task_status.inject({}) do |hash, key| 
+    status_count = options.task_status.keys.inject({}) do |hash, key| 
       hash[key] = 0
       hash
     end
