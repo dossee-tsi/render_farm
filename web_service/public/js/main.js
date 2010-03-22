@@ -1,7 +1,7 @@
 $(function(){
     $('.open').click(function(){
         task = getTask(this);
-        $.get('/tasks/' + getId(this),
+        $.get('/tasks/' + getHash(this),
             function(data)
             {
                 var dialog = $('<dl></dl>');
@@ -32,7 +32,7 @@ $(function(){
     $('.accept').click(function(){
         var task = getTask(this);
         disableButtons(task);
-        $.post('/tasks/' + getId(this),
+        $.post('/tasks/' + getHash(this),
             { status: 'accept' },
             function(data){
                 if (data.status == 'accepted')
@@ -48,7 +48,7 @@ $(function(){
     $('.reject').click(function(){
         var task = getTask(this);
         disableButtons(task);
-        $.post('/tasks/' + getId(this),
+        $.post('/tasks/' + getHash(this),
             { status: 'reject' },
             function(data){
                 if (data.status == 'rejected')
@@ -64,9 +64,9 @@ $(function(){
         $(task).find('.accept, .reject').attr('disabled', 'disabled');
     }
 
-    function getId(el)
+    function getHash(el)
     {
-        return $(el).parent().parent().attr('id').substring(4, 44);
+        return $(el).closest('tr').find('.hash').text();
     }
 
     function getTask(el)

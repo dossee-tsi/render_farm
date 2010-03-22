@@ -28,7 +28,7 @@
               <td><%=task.status.to_s.capitalize %></td>
               <td><%=task.created.getlocal %></td>
               <td><%=task.modified.getlocal %></td>
-              <td><%=task.hash %></td>
+              <td class="hash"><%=task.hash %></td>
               <td>
                 <button class="open">Open</button>
                 <button class="accept<% if task.status.to_s != 'examined' %> invisible<% end %>">Accept</button>
