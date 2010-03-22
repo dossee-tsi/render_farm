@@ -86,6 +86,6 @@ module RenderFarm
   load 'routes/client.rb'
   load 'routes/misc.rb'
   load 'routes/tasks.rb'
-  load 'routes/tasks_id.rb'
+  load 'routes/task.rb'
 
 end
