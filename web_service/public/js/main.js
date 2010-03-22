@@ -6,7 +6,7 @@ $(function(){
             {
                 if (data.status == 'examined')
                 {
-                    task.find('.accept, .reject').removeClass('invisible');
+                    task.find('.accept, .reject').removeClass('invisible').removeAttr('disabled');
                     task.attr('class', 'examined');
                     task.find('td:first + td').text('Examined');
                 }
