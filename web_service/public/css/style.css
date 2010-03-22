@@ -57,8 +57,8 @@ table.tasks button.invisible
 table.tasks tr { color: #444; }
 table.tasks tr:hover { color: #fff; }
 
-table.tasks tr.uploaded { background-color: #eee; }
-table.tasks tr.uploaded:hover { background-color: #999; }
+table.tasks tr.unpacked { background-color: #eee; }
+table.tasks tr.unpacked:hover { background-color: #999; }
 
 table.tasks tr.examined { background-color: #f4f4a4; }
 table.tasks tr.examined:hover { background-color: #bb3; }
@@ -71,6 +71,9 @@ table.tasks tr.sent:hover { background-color: #3bb; }
 
 table.tasks tr.deployed { background-color: #a4a4f4; }
 table.tasks tr.deployed:hover { background-color: #77f; }
+
+table.tasks tr.rendered { background-color: #f4a4f4; }
+table.tasks tr.rendered:hover { background-color: #f7f; }
 
 .ui-widget
 {

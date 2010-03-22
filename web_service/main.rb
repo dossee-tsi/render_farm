@@ -74,7 +74,7 @@ module RenderFarm
   get '/' do
     local_area!
     tasks = Task.all(
-      :conditions => { :status => options.task_status.keys - [:rejected, :completed] },
+      :conditions => { :status => options.task_status.keys - [:uploaded, :rejected, :completed] },
       :order => 'created desc'
     )
     clients = {}
