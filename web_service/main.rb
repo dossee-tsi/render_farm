@@ -8,7 +8,6 @@ module RenderFarm
   require 'zip/zip'
   require 'client'
   require 'task'
-  require 'status_node'
 
   configure do
     MongoMapper.database = 'renderfarm'
