@@ -4,7 +4,7 @@ $(function(){
         $.get('/tasks/' + getHash(this),
             function(data)
             {
-                if (data.status == 'unpacked')
+                if (data.status == 'examined')
                 {
                     task.find('.accept, .reject').removeClass('invisible');
                     task.attr('class', 'examined');
