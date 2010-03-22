@@ -25,6 +25,8 @@ module RenderFarm
     local_area!
     task = Task.first(:id => params[:id])
     throw_bad_request unless task
+    throw_bad_request if task.status == :uploaded
+    task.status = :examined if task.status == :unpacked
     json task.attributes.merge({:directory => File.join(options.tasks_dir, task.hash)})
   end
 
