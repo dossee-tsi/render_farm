@@ -100,7 +100,7 @@ module RenderFarm
 
     # Async extraction
     Thread.new do
-      destination = File.join(options.lx_dir, task.hash)
+      destination = File.join(options.tasks_dir, task.hash)
       unless unzip_lx(tempfile.path, destination, task.render_time)
         task.status = :rejected
         task.save
