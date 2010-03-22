@@ -1,9 +1,15 @@
 $(function(){
     $('.open').click(function(){
-        task = getTask(this);
+        var task = getTask(this);
         $.get('/tasks/' + getHash(this),
             function(data)
             {
+                if (data.status == 'unpacked')
+                {
+                    task.find('.accept, .reject').removeClass('invisible');
+                    task.attr('class', 'examined');
+                    task.find('td:first + td').text('Examined');
+                }
                 var dialog = $('<dl></dl>');
                 dialog.append('<dt>Render Time:</dt>')
                     .append('<dd>' + data.render_time + '</dd>')
@@ -33,7 +39,7 @@ $(function(){
         var task = getTask(this);
         disableButtons(task);
         $.post('/tasks/' + getHash(this),
-            { status: 'accept' },
+            { status: 'accepted' },
             function(data){
                 if (data.status == 'accepted')
                 {
@@ -49,7 +55,7 @@ $(function(){
         var task = getTask(this);
         disableButtons(task);
         $.post('/tasks/' + getHash(this),
-            { status: 'reject' },
+            { status: 'rejected' },
             function(data){
                 if (data.status == 'rejected')
                 {
