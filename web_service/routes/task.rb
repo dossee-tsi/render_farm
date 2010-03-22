@@ -25,8 +25,11 @@ module RenderFarm
     local_area!
     task = get_task(params[:hash])
     throw_bad_request if task.status == :uploaded
-    task.status = :examined if task.status == :unpacked
-    json task.attributes.merge({:directory => File.join(options.tasks_dir, task.hash)})
+    if task.status == :unpacked
+      task.status = :examined
+      task.save
+    end
+    json task.attributes.merge({ :directory => File.join(options.tasks_dir, task.hash) })
   end
 
   post '/tasks/:hash' do
