@@ -31,8 +31,8 @@
               <td class="hash"><%=task.hash %></td>
               <td>
                 <button class="open">Open</button>
-                <button class="accept<% if task.status.to_s != 'examined' %> invisible<% end %>">Accept</button>
-                <button class="reject<% unless ['unpacked', 'examined'].include? task.status.to_s %> invisible<% end %>">Reject</button>
+                <button class="accept<% unless task.status == :examined %> invisible<% end %>">Accept</button>
+                <button class="reject<% unless task.status == :examined %> invisible<% end %>">Reject</button>
               </td>
             </tr>
           <% end %>
