@@ -44,12 +44,12 @@ module RenderFarm
     end
 
     def local_area!
-      throw_unauthorized unless @env['REMOTE_ADDR'] === '127.0.0.1'
+      throw_unauthorized unless @env['REMOTE_ADDR'] =~ /^(127\.0\.0\.1|192\.168.+)$/
     end
 
     def client_area!
       unless authorized?
-        response['WWW-Authenticate'] = %(Basic realm="DOSSEE TSI Render Farm")
+        response['WWW-Authenticate'] = %(Basic realm="DOSSEE TTI Render Farm")
         throw_unauthorized
       end
     end
