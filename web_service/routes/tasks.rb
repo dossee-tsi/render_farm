@@ -87,7 +87,7 @@ module RenderFarm
     local_area!
     requires params, :status
     status = params[:status].to_sym
-    throw_bad_request unless options.task_status[task.status].include? status
+    throw_bad_request unless options.task_status.include? status
     tasks = Task.all(
       :conditions => { :status => status },
       :order => 'created desc'
