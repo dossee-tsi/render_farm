@@ -39,5 +39,21 @@ module RenderFarm
       set_task_status(task, params[:status].to_sym)
     end
   end
+  
+  get '/pictures/:hash' do
+    client_area!
+    task = get_task(params[:hash])
+    file_name = File.join(options.tasks_dir, task.hash, 'scene.png')
+    if file_size = File.size? file_name
+      content_type :png
+      headers {
+        'Content-Disposition' => 'inline; filename="' + task.hash + '.png"',
+        'Content-Length' => file_size,
+        'Cache-Control' => 'no-store, no-cache, must-revalidate, post-check=0, pre-check=0',
+        'Pragma' => 'no-cache'
+      }
+      File.read(file_name)
+    end
+  end
 
 end
