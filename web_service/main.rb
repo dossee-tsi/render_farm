@@ -65,6 +65,12 @@ module RenderFarm
       content_type :json, :charset => 'utf-8'
       map.to_json
     end
+    
+    def get_task_clients(tasks)
+      clients = {}
+      tasks.each {|task| clients[task.client_id] ||= Client.first(:id => task.client_id) }
+      clients
+    end
 
   end
 
@@ -76,10 +82,7 @@ module RenderFarm
       :conditions => { :status => options.task_status.keys - [:uploaded, :rejected, :completed] },
       :order => 'created desc'
     )
-    clients = {}
-    tasks.each {|task| clients[task.client_id] ||= Client.first(:id => task.client_id)}
-    
-    erb :index, :locals => { :tasks => tasks, :clients => clients }
+    erb :index, :locals => { :tasks => tasks, :clients => get_task_clients(tasks) }
   end
 
   load 'routes/client.rb'
