@@ -40,11 +40,11 @@ module RenderFarm
     end
   end
   
-  get '/pictures/:hash' do
+  get '/scenes/:hash' do
     client_area!
     task = get_task(params[:hash])
     file_name = File.join(options.tasks_dir, task.hash, 'scene.png')
-    if file_size = File.size? file_name
+    if file_size = File.size?(file_name)
       content_type :png
       headers({
         'Content-Disposition' => 'inline; filename="' + task.hash + '.png"',
